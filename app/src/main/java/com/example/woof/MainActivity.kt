@@ -83,11 +83,7 @@ class MainActivity : ComponentActivity() {
  */
 @Composable
 fun WoofApp() {
-    Scaffold(
-        topBar = {
-            WoofTopAppBar()
-        }
-    ) { it ->
+    Scaffold { it ->
         LazyColumn(contentPadding = it) {
             items(dogs) {
                 DogItem(
@@ -123,18 +119,20 @@ fun DogItem(
                     )
                 )
         ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(dimensionResource(R.dimen.padding_small))
-            ) {
-                DogIcon(dog.imageResourceId)
-                DogInformation(dog.name, dog.age)
-                Spacer(Modifier.weight(1f))
-                DogItemButton(
-                    expanded = expanded,
-                    onClick = { expanded = !expanded },
-                )
+            Card(modifier = modifier) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(dimensionResource(R.dimen.padding_small))
+                ) {
+                    DogIcon(dog.imageResourceId)
+                    DogInformation(dog.name, dog.age)
+                    Spacer(Modifier.weight(1f))
+                    DogItemButton(
+                        expanded = expanded,
+                        onClick = { expanded = !expanded },
+                    )
+                }
             }
             if (expanded) {
                 DogHobby(
